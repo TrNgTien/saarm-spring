@@ -23,7 +23,6 @@ public class Apartment extends BaseTzEntity {
     }
 
     public Apartment(String name, String status) {
-        super();
         this.status = status;
         this.name = name;
     }
