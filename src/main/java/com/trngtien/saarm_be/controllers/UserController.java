@@ -1,10 +1,12 @@
 package com.trngtien.saarm_be.controllers;
 
+import com.sun.tools.jconsole.JConsoleContext;
 import com.trngtien.saarm_be.models.User;
 import com.trngtien.saarm_be.models.reponses.ResponseObject;
 import com.trngtien.saarm_be.repositories.UserRepository;
 import com.trngtien.saarm_be.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -33,9 +35,10 @@ public class UserController {
 
     @GetMapping("")
     public ResponseEntity<ResponseObject> getAllUsers() {
-        List<User> users =  userRepository.findAll();
+        Page<User> users =  this.userService.getUsers();
+
         return ResponseEntity.status(HttpStatus.OK).body(
-                new ResponseObject("ok", "query ok", users)
+                new ResponseObject(HttpStatus.OK, "GET users", users)
         );
     }
 
